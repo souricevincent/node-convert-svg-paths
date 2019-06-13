@@ -1,5 +1,7 @@
 ## Start
 
+> "node-convert-svg-paths" is a command line tool
+
 Clone the project, `cd ./node-convert-svg-paths`, `npm install`. Is good
 
 ## convert svg paths with node
@@ -48,8 +50,8 @@ I use [animejs](https://animejs.com/documentation/#motionPath) for my motion pat
 anime({
   targets: '.st0',
   d: [
-    "youNewPath",
-    "youNewPath"
+    "yourNewPath",
+    "yourNewPath"
   ],
   autoplay: true,
   easing: 'easeOutQuad',
