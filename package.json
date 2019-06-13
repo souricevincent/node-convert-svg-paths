@@ -1,0 +1,19 @@
+{
+  "name": "convert_svg_path",
+  "version": "1.0.0",
+  "description": "Convert svg paths",
+  "main": "convert.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "convert": "./convert.js"
+  },
+  "dependencies": {
+    "jsdom": "^15.1.1",
+    "svgpath": "^2.2.2",
+    "xmldom": "^0.1.27"
+  }
+}

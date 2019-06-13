@@ -1,0 +1,4 @@
+/node_modules
+/converted_svg
+/originals_svg/*
+!/originals_svg/.gitkeep
