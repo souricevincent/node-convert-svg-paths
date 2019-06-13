@@ -28,9 +28,7 @@ Returns final path string.
 ###### And
 I added to that a function to apply curves on all segments with `.iterate(function(segment, index, x, y) [, keepLazyStack]) -> self`. (path to cubic)
 
----
-
-You can change config in `convert.js` if you want a absolute path svg or other...
+> You can change config in `convert.js` if you want a absolute path svg or other...
 
 ## Why ?
 
@@ -39,7 +37,7 @@ I use illustrator to make my vector drawing and there are some essential practic
 The number of points must be equal between path "to" and path "b".
 The direction of the path must match.
 And the starting point of the path.
----
+
 Despite all these precautions, my morphing may not work because my paths may contain relative or absolute, no curves while the other path is waiting for a curve, etc ...
 To overcome these problems I created "node-convert-svg-paths" to handle the problem before sending it to the client
 
