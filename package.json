@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "convert": "./convert.js"
+    "convert": "./index.js"
   },
   "dependencies": {
     "jsdom": "^15.1.1",
