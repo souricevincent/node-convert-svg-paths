@@ -41,7 +41,7 @@ originalsSvgFiles.forEach(file => {
                         segment = ['c', segment[1], segment[2], segment[1], segment[2], segment[1], segment[2]]
                     }
                     return [segment]
-                }).toString()
+                })
                 .toString()
             ;
             
