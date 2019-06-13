@@ -54,7 +54,7 @@ originalsSvgFiles.forEach(file => {
 
         fs.writeFile(path.join(__dirname, folderConvertedsSvg, file), doc, (err) => {
             if (err) throw err;
-            console.log(`files converteds in ${folderConvertedsSvg} folder`);
+            console.log(`${file} converted in "${folderConvertedsSvg}" folder`);
         });
 
         results.push({[file]: arrayPaths})
