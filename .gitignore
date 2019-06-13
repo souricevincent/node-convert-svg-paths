@@ -2,3 +2,5 @@
 /converted_svg
 /originals_svg/*
 !/originals_svg/.gitkeep
+/converteds_svg/*
+!/converteds_svg/.gitkeep

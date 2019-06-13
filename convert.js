@@ -4,6 +4,7 @@ const DOMParser = require('xmldom').DOMParser;
 const svgpath = require('svgpath');
 
 const folderOriginalsSvg = 'originals_svg';
+const folderConvertedsSvg = 'converteds_svg';
 
 /**
  * Check if folder "originals_svg" exist
@@ -17,19 +18,18 @@ var originalsSvgFiles = fs.readdirSync(path.join(__dirname, folderOriginalsSvg))
 
 
 var results = [];
+var xml, doc, DOMPaths;
 
 originalsSvgFiles.forEach(file => {
 
     if(path.extname(file) === '.svg') {
-        var xml = fs.readFileSync(path.join(__dirname, folderOriginalsSvg, file), {encoding: 'utf-8'});
-
-        var doc = new DOMParser().parseFromString(xml, 'text/xml');
-
-        var paths = doc.documentElement.getElementsByTagName('path');
+        xml = fs.readFileSync(path.join(__dirname, folderOriginalsSvg, file), {encoding: 'utf-8'});
+        doc = new DOMParser().parseFromString(xml, 'text/xml');
+        DOMPaths = doc.documentElement.getElementsByTagName('path');
 
         var arrayPaths = [];
-        for (var i = 0; i < paths.length; i++) {
-            var svgPathTransformed = new svgpath(paths[i].getAttribute('d'))
+        for (var i = 0; i < DOMPaths.length; i++) {
+            var svgPathTransformed = new svgpath(DOMPaths[i].getAttribute('d'))
                 .unarc()
                 .unshort()
                 .rel()
@@ -46,7 +46,17 @@ originalsSvgFiles.forEach(file => {
             ;
             
             arrayPaths.push(svgPathTransformed);
+
+            // Set new svg with new path in doc
+            DOMPaths[i].setAttribute('d', svgPathTransformed);
+
         }
+
+        fs.writeFile(path.join(__dirname, folderConvertedsSvg, file), doc, (err) => {
+            if (err) throw err;
+            console.log(`files converteds in ${folderConvertedsSvg} folder`);
+        });
+
         results.push({[file]: arrayPaths})
     }
     
