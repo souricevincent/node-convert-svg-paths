@@ -8,9 +8,6 @@
   },
   "author": "",
   "license": "ISC",
-  "bin": {
-    "convert": "./index.js"
-  },
   "dependencies": {
     "jsdom": "^15.1.1",
     "svgpath": "^2.2.2",
