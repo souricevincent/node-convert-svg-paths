@@ -36,9 +36,9 @@ I added to that a function to apply curves on all segments with `.iterate(functi
 
 For all the people who have already tried to morph svg will have noticed that to match a path with another path is complicated.
 I use illustrator to make my vector drawing and there are some essential practices to respect:
-The number of points must be equal between path "to" and path "b".
-The direction of the path must match.
-And the starting point of the path.
+- The number of points must be equal between path "a" and path "b".
+- The direction of the path must match.
+- And the starting point of the path.
 
 Despite all these precautions, my morphing may not work because my paths may contain relative or absolute, no curves while the other path is waiting for a curve, etc ...
 To overcome these problems I created "node-convert-svg-paths" to handle the problem before sending it to the client
