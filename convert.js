@@ -29,16 +29,18 @@ originalsSvgFiles.forEach(file => {
 
         var arrayPaths = [];
         for (var i = 0; i < DOMPaths.length; i++) {
+            console.log(DOMPaths[i].getAttribute('d'))
             var svgPathTransformed = new svgpath(DOMPaths[i].getAttribute('d'))
                 .unarc()
                 .unshort()
                 .rel()
                 .round(1)
                 .iterate(function(segment, index, x, y) {
-                    // Afin de rajouter des courbes sur tous les segments
+                    // Add curve on segment
                     if (segment[0] === 'l') {
-                        // ['courbe', segmentX, segmentY, inflexionX, inflexionY, toX, toY]
-                        segment = ['c', segment[1], segment[2], segment[1], segment[2], segment[1], segment[2]]
+                        // ['courbe', firstInflexionX, firstInflexionY, lastInflexionX, lastInflexionY, toX, toY]
+                        // Is a curve for relative path
+                        segment = ['c', 0, 0, segment[1], segment[2], segment[1], segment[2]];
                     }
                     return [segment]
                 })
