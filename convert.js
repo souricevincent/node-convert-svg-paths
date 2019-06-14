@@ -36,12 +36,21 @@ originalsSvgFiles.forEach(file => {
                 .rel()
                 .round(1)
                 .iterate(function(segment, index, x, y) {
+
+                    if (segment[0] === 'h') {
+                        segment = ['c', 0, 0, segment[1], 0, segment[1], 0]
+                    }
+
+                    if (segment[0] === 'v') {
+                        segment = ['c', 0, 0, 0, segment[1], 0, segment[1]]
+                    }
                     // Add curve on segment
                     if (segment[0] === 'l') {
-                        // ['courbe', firstInflexionX, firstInflexionY, lastInflexionX, lastInflexionY, toX, toY]
                         // Is a curve for relative path
+                        // ['courbe', firstInflexionX, firstInflexionY, lastInflexionX, lastInflexionY, toX, toY]
                         segment = ['c', 0, 0, segment[1], segment[2], segment[1], segment[2]];
                     }
+
                     return [segment]
                 })
                 .toString()
