@@ -29,7 +29,6 @@ originalsSvgFiles.forEach(file => {
 
         var arrayPaths = [];
         for (var i = 0; i < DOMPaths.length; i++) {
-            console.log(DOMPaths[i].getAttribute('d'))
             var svgPathTransformed = new svgpath(DOMPaths[i].getAttribute('d'))
                 .unarc()
                 .unshort()
@@ -40,19 +39,22 @@ originalsSvgFiles.forEach(file => {
                     // Add curve on segment
                     // Is a curve for relative path
                     // ['courbe', firstInflexionX, firstInflexionY, lastInflexionX, lastInflexionY, toX, toY]
+                    console.log(segment)
 
                     if (segment[0] === 'h') {
-                        segment = ['c', 0, 0, segment[1], 0, segment[1], 0]
+                        segment = ['c', 0, 0, segment[1], 0, segment[1], 0];
+                        return [segment]
                     }
 
                     if (segment[0] === 'v') {
-                        segment = ['c', 0, 0, 0, segment[1], 0, segment[1]]
+                        segment = ['c', 0, 0, 0, segment[1], 0, segment[1]];
+                        return [segment]
                     }
                     if (segment[0] === 'l') {
                         segment = ['c', 0, 0, segment[1], segment[2], segment[1], segment[2]];
+                        return [segment]
                     }
-
-                    return [segment]
+                    console.log(segment)
                 })
                 .toString()
             ;
