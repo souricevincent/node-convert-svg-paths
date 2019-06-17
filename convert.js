@@ -45,7 +45,11 @@ originalsSvgFiles.forEach(file => {
             };
             var newPathElem = doc.createElement('path');
             newPathElem.setAttribute('class', DOMRectsAttr.className);
-            newPathElem.setAttribute('d', `M${DOMRectsAttr.x}, ${DOMRectsAttr.y} h${DOMRectsAttr.width} v${DOMRectsAttr.height} h-${DOMRectsAttr.width}z`);
+
+            // Origin of the path is bottom - right
+            // Path of direction is anticlockwise
+            // Because illustrator rect interprets as well
+            newPathElem.setAttribute('d', `M${Number(DOMRectsAttr.x) + Number(DOMRectsAttr.width)}, ${Number(DOMRectsAttr.y) + Number(DOMRectsAttr.height)} v-${DOMRectsAttr.height} h-${DOMRectsAttr.height} v${DOMRectsAttr.width}z`);
             DOMSvg[0].replaceChild(newPathElem, DOMRects[rect])
         }
 
