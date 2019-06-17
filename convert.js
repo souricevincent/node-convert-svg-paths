@@ -25,9 +25,36 @@ originalsSvgFiles.forEach(file => {
     if(path.extname(file) === '.svg') {
         xml = fs.readFileSync(path.join(__dirname, folderOriginalsSvg, file), {encoding: 'utf-8'});
         doc = new DOMParser().parseFromString(xml, 'text/xml');
-        DOMPaths = doc.documentElement.getElementsByTagName('path');
+
+        var DOMSvg = doc.getElementsByTagName('svg');
 
         var arrayPaths = [];
+
+        /**
+         * Transforme <rect /> to <path />
+         * @type {HTMLCollectionOf<SVGElementTagNameMap[string]>}
+         */
+        DOMRects = doc.documentElement.getElementsByTagName('rect');
+        for (var rect = 0; rect < DOMRects.length; rect++) {
+            var DOMRectsAttr = {
+                className: DOMRects[rect].getAttribute('class'),
+                x: DOMRects[rect].getAttribute('x'),
+                y: DOMRects[rect].getAttribute('y'),
+                width: DOMRects[rect].getAttribute('width'),
+                height: DOMRects[rect].getAttribute('height')
+            };
+            var newPathElem = doc.createElement('path');
+            newPathElem.setAttribute('class', DOMRectsAttr.className);
+            newPathElem.setAttribute('d', `M${DOMRectsAttr.x}, ${DOMRectsAttr.y} h${DOMRectsAttr.width} v${DOMRectsAttr.height} h-${DOMRectsAttr.width}z`);
+            DOMSvg[0].replaceChild(newPathElem, DOMRects[rect])
+        }
+
+
+        /**
+         * Transforme attr d in path
+         * @type {HTMLCollectionOf<SVGElementTagNameMap[string]>}
+         */
+        DOMPaths = doc.documentElement.getElementsByTagName('path');
         for (var i = 0; i < DOMPaths.length; i++) {
             var svgPathTransformed = new svgpath(DOMPaths[i].getAttribute('d'))
                 .unarc()
