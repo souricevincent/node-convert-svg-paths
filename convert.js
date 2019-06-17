@@ -39,8 +39,6 @@ originalsSvgFiles.forEach(file => {
                     // Add curve on segment
                     // Is a curve for relative path
                     // ['courbe', firstInflexionX, firstInflexionY, lastInflexionX, lastInflexionY, toX, toY]
-                    console.log(segment)
-
                     if (segment[0] === 'h') {
                         segment = ['c', 0, 0, segment[1], 0, segment[1], 0];
                         return [segment]
@@ -54,7 +52,6 @@ originalsSvgFiles.forEach(file => {
                         segment = ['c', 0, 0, segment[1], segment[2], segment[1], segment[2]];
                         return [segment]
                     }
-                    console.log(segment)
                 })
                 .toString()
             ;
